@@ -6,11 +6,18 @@ const JobPage = () => {
   const [job, setJob] = useState(null);
   const navigate = useNavigate();
 
+  const apiUrl = 'http://127.0.0.1:4000/api/jobs';
   const deleteJob = async () => {
-    console.log(JobPage);
+    await fetch (`${apiUrl}/${id}`,{
+      method:'Delete',
+    });
+
+    console.log('job deleted sucessfully');
   };
 
-  const apiUrl = 'http://127.0.0.1:4000/api/jobs';
+  
+
+  //const apiUrl = 'http://127.0.0.1:4000/api/jobs';
 
   const fetchJobs = async (id) => {
     const response = await fetch(`${apiUrl}/${id}`)
