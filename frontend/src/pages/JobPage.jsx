@@ -28,7 +28,7 @@ const JobPage = () => {
 
   useEffect(() => {
     fetchJobs(id)
-  }, []);
+  }, [job]);
 
 
   if (!job) {

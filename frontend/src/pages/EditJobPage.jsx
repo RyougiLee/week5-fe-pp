@@ -42,13 +42,44 @@ const EditJobPage = () => {
     fetchJob();
   }, [id]);
 
+  const updateJob = async (jobId, updatedData) => {
+    const response = await fetch(`${"http://127.0.0.1:4000/api/jobs"}/${jobId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    const updatedJob = await response.json();
+    console.log('Job updated:', updatedJob);
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
     console.log("EditJobPage");
+
+    const updatedData = {
+      title,
+      type,
+      description,
+      company: {
+        name: companyName,
+        contactEmail,
+        contactPhone,
+      },
+      location,
+      salary: Number(salary),
+    }
+
+    updateJob(id,updatedData)
+    navigate(`/jobs/${id}`)
+
   };
 
   const cancelEdit = () => {
     console.log("cancelEdit");
+    navigate(`/jobs/${id}`)
   };
 
   return (
