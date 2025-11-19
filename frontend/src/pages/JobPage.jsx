@@ -10,6 +10,20 @@ const JobPage = () => {
     console.log(JobPage);
   };
 
+  const apiUrl = 'http://127.0.0.1:4000/api/jobs';
+
+  const fetchJobs = async (id) => {
+    const response = await fetch(`${apiUrl}/${id}`)
+    const data = await response.json()
+    console.log('Single Job', data)
+    setJob(data)
+  }
+
+  useEffect(() => {
+    fetchJobs(id)
+  }, []);
+
+
   if (!job) {
     return <div>Loading...</div>;
   }
